@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>VolumeBooster.GUI</RootNamespace>
+    <AssemblyName>VolumeBooster</AssemblyName>
+    <ApplicationIcon />
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>false</PublishSingleFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyTitle>系统音量增强器</AssemblyTitle>
+    <Description>系统级音量增强工具</Description>
+    <Company>VolumeBooster</Company>
+    <Product>VolumeBooster</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+</Project>
