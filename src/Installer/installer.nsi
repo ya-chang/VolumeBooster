@@ -8,7 +8,7 @@
 ; ========== 基本信息 ==========
 
 Name "系统音量增强器"
-OutFile "VolumeBooster-Setup.exe"
+OutFile "..\..\VolumeBooster-Setup.exe"
 InstallDir "$PROGRAMFILES\VolumeBooster"
 InstallDirRegKey HKLM "Software\VolumeBooster" "InstallDir"
 RequestExecutionLevel admin
@@ -59,9 +59,9 @@ Section "安装" SecInstall
     ${EndIf}
     
     ; 复制文件
-    File "build\bin\VolumeBoosterAPO.dll"
-    File "build\bin\VolumeBooster.exe"
-    File "build\bin\DeviceListener.exe"
+    File "..\..\build\bin\VolumeBoosterAPO.dll"
+    File "..\..\build\bin\VolumeBooster.exe"
+    File "..\..\build\bin\DeviceListener.exe"
     
     ; 写入注册表（安装路径）
     WriteRegStr HKLM "Software\VolumeBooster" "InstallDir" "$INSTDIR"
