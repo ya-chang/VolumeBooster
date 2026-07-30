@@ -1,0 +1,75 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup MSVC
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Setup CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Install NSIS
+      run: |
+        choco install nsis -y
+
+    - name: Build C++ (APO + DeviceListener)
+      run: |
+        cmake -B build -G "Visual Studio 17 2022" -A x64
+        cmake --build build --config Release
+
+    - name: Build GUI (.NET WPF)
+      run: |
+        cd src/GUI
+        dotnet publish -c Release -r win-x64 --self-contained false -o ../../build/bin
+        cd ../..
+
+    - name: Verify build artifacts
+      run: |
+        if (!(Test-Path "build/bin/VolumeBoosterAPO.dll")) { throw "VolumeBoosterAPO.dll not found" }
+        if (!(Test-Path "build/bin/VolumeBooster.exe")) { throw "VolumeBooster.exe not found" }
+        if (!(Test-Path "build/bin/DeviceListener.exe")) { throw "DeviceListener.exe not found" }
+        echo "All build artifacts verified."
+
+    - name: Build Installer
+      run: |
+        makensis /V2 src/Installer/installer.nsi
+
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          VolumeBooster-Setup.exe
+          build/bin/VolumeBoosterAPO.dll
+          build/bin/VolumeBooster.exe
+          build/bin/DeviceListener.exe
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: VolumeBooster
+        path: |
+          VolumeBooster-Setup.exe
+          build/bin/VolumeBoosterAPO.dll
+          build/bin/VolumeBooster.exe
+          build/bin/DeviceListener.exe
