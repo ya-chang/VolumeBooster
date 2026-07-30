@@ -19,7 +19,6 @@ target_link_libraries(VolumeBoosterAPO PRIVATE
 set_target_properties(VolumeBoosterAPO PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
     PREFIX ""
 )
 
@@ -27,10 +26,8 @@ target_compile_definitions(VolumeBoosterAPO PRIVATE
     WIN32_LEAN_AND_MEAN UNICODE _UNICODE
 )
 
-# ========== Device Listener Service ==========
-add_executable(DeviceListener
-    src/DeviceListener/DeviceListener.cpp
-)
+# ========== Device Listener ==========
+add_executable(DeviceListener src/DeviceListener/DeviceListener.cpp)
 
 target_link_libraries(DeviceListener PRIVATE
     ole32 oleaut32 uuid advapi32 kernel32 user32
@@ -38,7 +35,6 @@ target_link_libraries(DeviceListener PRIVATE
 
 set_target_properties(DeviceListener PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-    OUTPUT_NAME "DeviceListener"
 )
 
 target_compile_definitions(DeviceListener PRIVATE
@@ -49,7 +45,4 @@ target_compile_definitions(DeviceListener PRIVATE
 install(TARGETS VolumeBoosterAPO DeviceListener
     RUNTIME DESTINATION bin
     LIBRARY DESTINATION bin
-    ARCHIVE DESTINATION lib
 )
-
-install(FILES src/APO/VolumeBoosterAPO.h DESTINATION include)
