@@ -3,6 +3,7 @@
 #include <functiondiscoverykeys_devpkey.h>
 #include <strsafe.h>
 #include <stdio.h>
+#include <ctime>
 
 // ========== 设备变更监听器 ==========
 
