@@ -20,6 +20,7 @@ set_target_properties(VolumeBoosterAPO PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
+    PREFIX ""
 )
 
 target_compile_definitions(VolumeBoosterAPO PRIVATE
@@ -37,6 +38,7 @@ target_link_libraries(DeviceListener PRIVATE
 
 set_target_properties(DeviceListener PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    OUTPUT_NAME "DeviceListener"
 )
 
 target_compile_definitions(DeviceListener PRIVATE
