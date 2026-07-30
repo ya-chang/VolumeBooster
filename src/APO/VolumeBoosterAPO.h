@@ -4,6 +4,14 @@
 #include <audioenginebaseapo.h>
 #include <mmdeviceapi.h>
 #include <audiopolicy.h>
+
+// 兼容不同 SDK 版本
+#ifndef APO_PROCESS_BUFFER_VALID
+#define APO_PROCESS_BUFFER_VALID 1
+#endif
+#ifndef APO_PROCESS_BUFFER_SILENT
+#define APO_PROCESS_BUFFER_SILENT 0
+#endif
 #include <unordered_map>
 #include <atomic>
 #include <cmath>
@@ -131,11 +139,11 @@ public:
     HRESULT STDMETHODCALLTYPE GetInputChannelCount(UINT32* pu32ChannelCount) override;
 
     // IAudioProcessingObjectRT - 实时处理
-    // 注意：Process 的签名必须严格匹配 SDK 定义
-    APOProcessResult Process(
-        UINT32 u32NumInputConnections,
+    // 使用 ULONG 兼容不同 SDK 版本
+    ULONG Process(
+        ULONG u32NumInputConnections,
         APO_CONNECTION_DESCRIPTOR** ppInputConnections,
-        UINT32 u32NumOutputConnections,
+        ULONG u32NumOutputConnections,
         APO_CONNECTION_DESCRIPTOR** ppOutputConnections) override;
 
 private:

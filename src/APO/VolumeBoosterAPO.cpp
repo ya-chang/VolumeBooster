@@ -146,24 +146,24 @@ HRESULT STDMETHODCALLTYPE VolumeBoosterAPO::GetInputChannelCount(UINT32* pu32Cha
 
 // ========== IAudioProcessingObjectRT ==========
 
-APOProcessResult VolumeBoosterAPO::Process(
-    UINT32 u32NumInputConnections,
+ULONG VolumeBoosterAPO::Process(
+    ULONG u32NumInputConnections,
     APO_CONNECTION_DESCRIPTOR** ppInputConnections,
-    UINT32 u32NumOutputConnections,
+    ULONG u32NumOutputConnections,
     APO_CONNECTION_DESCRIPTOR** ppOutputConnections)
 {
     if (!ppInputConnections || !ppOutputConnections ||
         u32NumInputConnections == 0 || u32NumOutputConnections == 0) {
-        return APOPROCESS_BUFFER_SILENT;
+        return 0;
     }
     
     APO_CONNECTION_PROPERTY* pInputProp = ppInputConnections[0]->pProperty;
     APO_CONNECTION_PROPERTY* pOutputProp = ppOutputConnections[0]->pProperty;
     
-    if (!pInputProp || !pOutputProp) return APOPROCESS_BUFFER_SILENT;
+    if (!pInputProp || !pOutputProp) return 0;
     
     UINT32 frameCount = pInputProp->u32ValidFrameCount;
-    if (frameCount == 0) return APOPROCESS_BUFFER_SILENT;
+    if (frameCount == 0) return 0;
     
     float* pInput = (float*)pInputProp->pBuffer;
     float* pOutput = (float*)pOutputProp->pBuffer;
@@ -196,7 +196,7 @@ APOProcessResult VolumeBoosterAPO::Process(
     pOutputProp->u32ValidFrameCount = frameCount;
     pOutputProp->u32BufferFlags = pInputProp->u32BufferFlags;
     
-    return APOPROCESS_BUFFER_VALID;
+    return 1;  // APO_PROCESS_BUFFER_VALID
 }
 
 // ========== 内部方法 ==========
