@@ -62,7 +62,6 @@ Section "安装" SecInstall
     File "build\bin\VolumeBoosterAPO.dll"
     File "build\bin\VolumeBooster.exe"
     File "build\bin\DeviceListener.exe"
-    File "LICENSE"
     
     ; 写入注册表（安装路径）
     WriteRegStr HKLM "Software\VolumeBooster" "InstallDir" "$INSTDIR"
@@ -129,7 +128,6 @@ Section "Uninstall"
     Delete "$INSTDIR\VolumeBoosterAPO.dll"
     Delete "$INSTDIR\VolumeBooster.exe"
     Delete "$INSTDIR\DeviceListener.exe"
-    Delete "$INSTDIR\LICENSE"
     Delete "$INSTDIR\Uninstall.exe"
     RMDir "$INSTDIR"
     
