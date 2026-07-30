@@ -39,7 +39,7 @@ jobs:
     - name: Build GUI (.NET WPF)
       run: |
         cd src\GUI
-        dotnet publish -c Release -r win-x64 --self-contained false -o ..\..\build\bin
+        dotnet publish -c Release -r win-x64 --self-contained true -o ..\..\build\bin
       shell: cmd
 
     - name: Verify build artifacts
