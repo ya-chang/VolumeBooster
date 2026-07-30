@@ -140,6 +140,11 @@ public:
     HRESULT STDMETHODCALLTYPE GetInputChannelCount(UINT32* p) override {
         if (!p) return E_POINTER; *p = 2; return S_OK;
     }
+    HRESULT STDMETHODCALLTYPE Reset() override { return S_OK; }
+
+    // IAudioProcessingObjectRT
+    UINT32 CalcInputFrames(UINT32 u32OutputFrameCount) override { return u32OutputFrameCount; }
+    UINT32 CalcOutputFrames(UINT32 u32InputFrameCount) override { return u32InputFrameCount; }
 
     // IAudioProcessingObjectRT - 核心实时处理
     // 方法名必须是 APOProcess，返回 void，参数用 APO_CONNECTION_PROPERTY**

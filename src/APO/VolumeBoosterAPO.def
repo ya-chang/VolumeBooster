@@ -1,0 +1,5 @@
+; VolumeBoosterAPO.def - DLL 导出定义
+LIBRARY VolumeBoosterAPO
+EXPORTS
+    DllGetClassObject PRIVATE
+    DllCanUnloadNow PRIVATE

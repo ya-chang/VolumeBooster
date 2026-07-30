@@ -1,4 +1,4 @@
-// DllMain.cpp - APO DLL 入口点 + COM 工厂 + 导出函数
+// DllMain.cpp - APO DLL 入口点 + COM 工厂
 #include "VolumeBoosterAPO.h"
 
 HMODULE g_hModule = NULL;
@@ -44,10 +44,9 @@ public:
 static VolumeBoosterAPOFactory g_Factory;
 
 // ========== COM 标准导出 ==========
+// 注意：导出通过 .def 文件实现，避免与 SDK 头文件中的声明冲突
 
-extern "C" {
-
-__declspec(dllexport) HRESULT STDAPICALLTYPE DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
+HRESULT STDAPICALLTYPE DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 {
     if (!ppv) return E_POINTER;
     if (rclsid == CLSID_VolumeBoosterAPO) return g_Factory.QueryInterface(riid, ppv);
@@ -55,9 +54,7 @@ __declspec(dllexport) HRESULT STDAPICALLTYPE DllGetClassObject(REFCLSID rclsid, 
     return CLASS_E_CLASSNOTAVAILABLE;
 }
 
-__declspec(dllexport) HRESULT STDAPICALLTYPE DllCanUnloadNow()
+HRESULT STDAPICALLTYPE DllCanUnloadNow()
 {
     return S_FALSE;
 }
-
-}  // extern "C"

@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(VolumeBoosterAPO SHARED
     src/APO/VolumeBoosterAPO.cpp
     src/APO/DllMain.cpp
+    src/APO/VolumeBoosterAPO.def
 )
 
 target_include_directories(VolumeBoosterAPO PRIVATE src/APO)
