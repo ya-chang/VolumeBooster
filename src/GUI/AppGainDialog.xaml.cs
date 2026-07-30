@@ -83,14 +83,14 @@ namespace VolumeBooster.GUI
                 }
                 else
                 {
-                    MessageBox.Show("找不到该进程，请确认进程名正确且正在运行。", 
+                    System.Windows.MessageBox.Show("找不到该进程，请确认进程名正确且正在运行。", 
                                    "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("请选择一个应用程序或手动输入进程名。", 
+                System.Windows.MessageBox.Show("请选择一个应用程序或手动输入进程名。", 
                                "提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }

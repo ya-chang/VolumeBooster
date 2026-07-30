@@ -182,13 +182,13 @@ namespace VolumeBooster.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"设置开机自启失败: {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show($"设置开机自启失败: {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
         // ========== 增强开关 ==========
 
-        private void BtnEnable_Click(object sender, RoutedEventArgs e)
+        public void BtnEnable_Click(object sender, RoutedEventArgs e)
         {
             _isEnabled = true;
             SendParameters();
@@ -197,7 +197,7 @@ namespace VolumeBooster.GUI
             SaveSettings();
         }
 
-        private void BtnDisable_Click(object sender, RoutedEventArgs e)
+        public void BtnDisable_Click(object sender, RoutedEventArgs e)
         {
             _isEnabled = false;
             // 发送 100% 增益（原声）

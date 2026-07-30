@@ -15,7 +15,7 @@ namespace VolumeBooster.GUI
             using var mutex = new System.Threading.Mutex(true, "VolumeBooster_SingleInstance", out createdNew);
             if (!createdNew)
             {
-                MessageBox.Show("程序已在运行中，请检查系统托盘。", "音量增强器", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("程序已在运行中，请检查系统托盘。", "音量增强器", MessageBoxButton.OK, MessageBoxImage.Information);
                 Shutdown();
                 return;
             }
